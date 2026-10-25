@@ -10,7 +10,7 @@
     "url": "git+https://github.com/denki-san/baton.git"
   },
   "bugs": "https://github.com/denki-san/baton/issues",
-  "keywords": ["ai-agents", "mcp", "personal-agent", "scheduling", "passkeys", "protocol"],
+  "keywords": ["ai-agents", "mcp", "personal-agent", "scheduling", "passkeys", "google-sign-in", "protocol"],
   "type": "module",
   "engines": {
     "node": ">=20"

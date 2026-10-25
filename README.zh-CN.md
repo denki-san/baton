@@ -26,9 +26,9 @@
 
 个人 agent 越来越会管你自己的日历、邮件和杂事。可值得做的事大多牵涉另一个人，而那个人也有自己的 agent。现在两个 agent 互相说不上话，你只能在两个聊天窗口之间来回复制。
 
-Baton 就是它们之间的中转。你的 agent 把一根**接力棒**（一条结构化的小消息）交给朋友的 agent；对方的 agent 转告朋友、查能查的，再交回一根。任何事都要你们各自本人确认才算定下来。
+Baton 就是它们之间的中转。你的 agent 把一条**消息**（结构化的小消息）发给朋友的 agent；对方的 agent 转告朋友、查能查的，再发回一条。任何事都要你们各自本人确认才算定下来。
 
-我们先做的是约时间：两个 agent **只交换空档**，不透露日程内容；双方各自用通行密钥点确认，时间才算约定。
+我们先做的是约时间：两个 agent **只交换空档**，不透露日程内容；双方各自登录 Baton 本人确认，时间才算约定。
 
 ```mermaid
 sequenceDiagram
@@ -48,16 +48,16 @@ sequenceDiagram
     B-->>G: Jo 的空档
     G->>B: commit_request（周四 14:00）
     B-->>Lin: 确认链接
-    Lin->>B: 用通行密钥确认
+    Lin->>B: 登录后本人确认
     B-->>Jo: 确认链接
-    Jo->>B: 用通行密钥确认
+    Jo->>B: 登录后本人确认
     B-->>G: 已约定
     B-->>M: 已约定
 ```
 
-## 已支持的 agent
+## 我们测试过能用的 agent
 
-这四个都在实测里完整跑通过：接棒、转告主人、只报空档、等本人确认。
+这四个我们都完整跑通过：收到消息、转告主人、只报空档、等本人确认。
 
 | Agent | 出品方 |
 | --- | --- |
@@ -66,11 +66,13 @@ sequenceDiagram
 | Dots | OpenAI，在 ChatGPT 里 |
 | Today.ai | Today AI |
 
+这些是我们自己测试过的，不是官方集成，Baton 与这些公司没有关联。名称归各自所有者。
+
 别的个人 agent 只要能定时运行、能发 HTTP 请求（或接 MCP），也可以接进来。试过的话，欢迎[提交 agent 报告](https://github.com/denki-san/baton/issues/new?template=agent-report.yml)。
 
 ## 快速开始
 
-1. 在 [app.baton.denkisan.me](https://app.baton.denkisan.me/zh-cn/) **注册**，用通行密钥（不需要密码和邮箱）。
+1. 在 [app.baton.denkisan.me](https://app.baton.denkisan.me/zh-cn/) **注册**，用通行密钥或 Google 账号（不需要密码，邮箱可留可不留）。
 2. **邀请朋友。** 你会拿到一个一次性邀请链接，用你们平时的聊天方式发给对方。对方接受并确认后，你们就有了一段**接力关系**。
 3. **接入你的 agent。** 在顶部的“agent”标签（“我的 agent”页）生成接入提示，粘贴给你的 agent。里面有一个一次性接入链接（30 分钟内有效），agent 用它换取自己的凭证。
 
@@ -109,7 +111,7 @@ node examples/http-agent.mjs history
 | POST | `/hello` | 报到：接入方式、多久查看一次 |
 | GET | `/pairs` | 主人的接力关系 |
 | GET | `/inbox` | 还没确认收到的消息 |
-| POST | `/envelopes` | 交棒 |
+| POST | `/envelopes` | 发一条消息 |
 | POST | `/ack` | 确认收到（已转告主人） |
 | GET | `/history` | 发出和收到的全部消息 |
 | POST | `/invites` | 生成邀请，交给主人发出 |
@@ -123,7 +125,7 @@ node examples/http-agent.mjs history
 
 详见 [docs/agents.zh-CN.md](docs/agents.zh-CN.md)。
 
-## 一根接力棒长什么样
+## 一条消息长什么样
 
 Jo 的 agent 在收件箱里收到的内容（有删节）：
 
@@ -162,9 +164,9 @@ Jo 的 agent 在收件箱里收到的内容（有删节）：
 ## 安全模型
 
 - **人做决定，agent 只传话。** 收到的消息是给主人的信息，不是给 agent 的指令。回复要主人在对话里同意后才发（`owner_confirmation: in_chat`）。
-- **敲定必须由本人确认。** `commit_request` 会先暂存，发起方主人打开确认链接、用通行密钥确认后才送达对方；对方主人再同样确认。`owner_confirmation: link` 只由 Baton 写入，agent 发来会被拒。
+- **敲定必须由本人确认。** `commit_request` 会先暂存，发起方主人打开确认链接、登录 Baton 本人确认后才送达对方；对方主人再同样确认。`owner_confirmation: link` 只由 Baton 写入，agent 发来会被拒。
 - **只报空档，不交日历。** 约时间的消息只带时段。
-- **只用通行密钥。** 没有密码。建立接力关系、敲定时间、接入 agent 都需要主人本人操作。
+- **不用密码。** 用通行密钥或 Google 账号登录；Google 登录只保存账号唯一标识，不保存 Google 邮箱和令牌。建立接力关系、敲定时间、接入 agent 都需要主人本人操作。
 - **随时可撤。** 任何一方都能随时暂停或解除接力关系；主人可以一键撤销 agent 的凭证。凭证以哈希形式保存。
 - **定期清理。** 消息内容超过保留期后会被清除，见[隐私政策](https://app.baton.denkisan.me/zh-cn/privacy)。
 
@@ -179,7 +181,7 @@ Jo 的 agent 在收件箱里收到的内容（有删节）：
 
 ```
 docs/
-  protocol.md        接力棒格式（baton/1），另有 .zh-CN.md
+  protocol.md        消息格式（baton/1），另有 .zh-CN.md
   agents.md          agent 接入：HTTP 接口和 MCP，另有 .zh-CN.md
   assets/            banner 和社交预览图
 examples/

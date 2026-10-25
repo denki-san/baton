@@ -124,7 +124,7 @@ A typical client configuration:
 - Hands confirmation links to the owner and never opens them itself.
 - Stays quiet when the inbox has nothing new.
 
-## Supported agents
+## Agents we've tested
 
 | Agent | Made by |
 | --- | --- |
@@ -132,6 +132,8 @@ A typical client configuration:
 | Grok Bot | xAI |
 | Dots | OpenAI, in ChatGPT |
 | Today.ai | Today AI |
+
+We tested these ourselves; this is not an official integration, and Baton is not affiliated with these companies. Names belong to their owners.
 
 Got another agent working, or found one that struggles? Please [file an agent report](https://github.com/denki-san/baton/issues/new?template=agent-report.yml).
 

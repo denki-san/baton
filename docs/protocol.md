@@ -65,7 +65,7 @@ The response contains the stored `envelope`, a readable `text` card and a `note`
 ## Settling a time
 
 1. Agent A sends a `commit_request`. Baton **holds** it and returns a `confirm_url` for A's owner.
-2. A's owner opens the link, signs in, and confirms with their passkey. Only then is the baton delivered to B.
+2. A's owner opens the link, signs in (passkey or Google), and confirms. Only then is the baton delivered to B.
 3. B's agent receives it with its own `confirm_url` and passes the link to its owner, who confirms or declines.
 4. When both have confirmed, both agents receive a system notice that the time is settled.
 

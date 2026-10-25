@@ -28,7 +28,7 @@ Personal agents are getting good at your own calendar, inbox and errands. But mo
 
 Baton is the relay between them. Your agent passes a **baton** (a small, structured message) to your friend's agent; theirs tells your friend, checks what it can, and passes one back. Nothing is settled until each of you confirms it yourself.
 
-Scheduling is the first case we built for: the agents trade **only free times**, never calendar details, and a time is settled only when both people tap confirm with their passkey.
+Scheduling is the first case we built for: the agents trade **only free times**, never calendar details, and a time is settled only when both people sign in to Baton and confirm it themselves.
 
 ```mermaid
 sequenceDiagram
@@ -48,16 +48,16 @@ sequenceDiagram
     B-->>G: Jo's free times
     G->>B: commit_request (Thu 14:00)
     B-->>Lin: confirmation link
-    Lin->>B: confirm with passkey
+    Lin->>B: sign in and confirm
     B-->>Jo: confirmation link
-    Jo->>B: confirm with passkey
+    Jo->>B: sign in and confirm
     B-->>G: settled
     B-->>M: settled
 ```
 
-## Supported agents
+## Agents we've tested
 
-All four have been run end to end: receiving batons, telling their owner, sharing only free times and waiting for their owner's own confirmation.
+We have run all four end to end: receiving batons, telling their owner, sharing only free times and waiting for their owner's own confirmation.
 
 | Agent | Made by |
 | --- | --- |
@@ -66,11 +66,13 @@ All four have been run end to end: receiving batons, telling their owner, sharin
 | Dots | OpenAI, in ChatGPT |
 | Today.ai | Today AI |
 
+We tested these ourselves; this is not an official integration, and Baton is not affiliated with these companies. Names belong to their owners.
+
 Any other personal agent that can run on a schedule and make HTTP requests (or use MCP) can connect too. If you try one, please [file an agent report](https://github.com/denki-san/baton/issues/new?template=agent-report.yml).
 
 ## Quick start
 
-1. **Sign up** at [app.baton.denkisan.me](https://app.baton.denkisan.me) with a passkey (no password, no email).
+1. **Sign up** at [app.baton.denkisan.me](https://app.baton.denkisan.me) with a passkey or your Google account. No password; an email address is optional.
 2. **Invite a friend.** You get a one-time invite link; send it however you two usually talk. When they accept and confirm, the two of you have a *relay* (called a *pair* in the API).
 3. **Connect your agent.** On the **Agents** tab (*My agents*), create a setup prompt and paste it into your agent. It contains a one-time setup link (valid 30 minutes) that your agent exchanges for its own credential.
 
@@ -162,9 +164,9 @@ What Jo's agent receives in its inbox (trimmed):
 ## Security model
 
 - **People decide, agents carry.** An incoming baton is information for the owner, not an instruction to the agent. Replies go out only after the owner agrees in chat (`owner_confirmation: in_chat`).
-- **Settling needs a human.** A `commit_request` is held until its sender's owner opens a confirmation link and confirms with their passkey; then the other owner does the same. `owner_confirmation: link` is written only by Baton and is rejected if an agent sends it.
+- **Settling needs a human.** A `commit_request` is held until its sender's owner opens a confirmation link, signed in to Baton, and confirms; then the other owner does the same. `owner_confirmation: link` is written only by Baton and is rejected if an agent sends it.
 - **Free times, not calendars.** Scheduling batons carry time slots only.
-- **Passkeys only.** No passwords. Pairing, settling a time and connecting an agent each need the owner's own action.
+- **No passwords.** People sign in with a passkey or with Google; Baton keeps only the Google account identifier, not the Google email or tokens. Pairing, settling a time and connecting an agent each need the owner's own action.
 - **Revocable.** Either person can pause or unbind a pair at any time; an owner can revoke an agent's credential in one click. Credentials are stored hashed.
 - **Retention.** Message content is cleared after a retention period; see the [privacy policy](https://app.baton.denkisan.me/privacy).
 
