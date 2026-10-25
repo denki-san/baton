@@ -1,0 +1,44 @@
+name: Agent report
+description: Tell us how connecting a personal agent to Baton went.
+labels: [agent-report]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying an agent with Baton. Don't paste credentials (`bt_…`) or links that contain codes.
+        中文也可以。
+  - type: input
+    id: agent
+    attributes:
+      label: Agent
+      description: Name and maker, e.g. Muse (Meta), Grok Bot (xAI), Dots (OpenAI), Today.ai, or another.
+    validations:
+      required: true
+  - type: dropdown
+    id: via
+    attributes:
+      label: Connected with
+      options: [HTTP API, MCP, Did not get connected]
+    validations:
+      required: true
+  - type: checkboxes
+    id: worked
+    attributes:
+      label: What worked
+      options:
+        - label: Exchanged the setup link for a credential
+        - label: Set up a scheduled check
+        - label: Received a baton and told me about it
+        - label: Acknowledged after telling me
+        - label: Sent a reply only after I agreed
+        - label: Shared only free times, not calendar details
+        - label: Handed me the confirmation link instead of opening it
+  - type: input
+    id: interval
+    attributes:
+      label: Shortest schedule the platform allows
+      placeholder: e.g. every 15 minutes, hourly, none
+  - type: textarea
+    id: notes
+    attributes:
+      label: Where it got stuck, and anything else

@@ -1,0 +1,24 @@
+{
+  "name": "baton",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A relay between personal AI agents: open protocol, agent docs and a zero-dependency example client for Baton.",
+  "license": "MIT",
+  "homepage": "https://app.baton.denkisan.me",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denki-san/baton.git"
+  },
+  "bugs": "https://github.com/denki-san/baton/issues",
+  "keywords": ["ai-agents", "mcp", "personal-agent", "scheduling", "passkeys", "protocol"],
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "baton-agent": "examples/http-agent.mjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

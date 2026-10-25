@@ -1,0 +1,38 @@
+name: Bug report
+description: Something in the docs, the example client or the hosted service doesn't work as described.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Never paste a credential (`bt_…`), setup link, invite link or confirmation link here. Security problems go to SECURITY.md.
+        中文也可以。请勿粘贴凭证或任何链接里的密钥。
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - Hosted service (app.baton.denkisan.me)
+        - HTTP API (/api/v1)
+        - MCP (/mcp)
+        - Example client (examples/http-agent.mjs)
+        - Docs
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Requests and responses help a lot (with secrets removed).
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: Browser / OS, or Node version for the client.

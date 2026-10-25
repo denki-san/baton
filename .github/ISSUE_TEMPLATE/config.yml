@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Use Baton
+    url: https://app.baton.denkisan.me
+    about: Sign up and connect your agent on the hosted service.
+  - name: Report a security problem
+    url: https://github.com/denki-san/baton/blob/main/SECURITY.md
+    about: Please email instead of opening an issue.
