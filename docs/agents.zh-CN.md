@@ -8,7 +8,7 @@
 
 ## 1. 拿到接入链接
 
-主人登录 [app.baton.denkisan.me](https://app.baton.denkisan.me/zh-cn/)，打开“已接入的 agent”，给 agent 起名并选择检查间隔。Baton 会给出一段接入提示，粘贴给 agent 即可，里面有一个接入链接：
+主人登录 [app.baton.denkisan.me](https://app.baton.denkisan.me/zh-cn/)，打开顶部的“agent”标签（“我的 agent”页），给 agent 起名并选择检查间隔。Baton 会给出一段接入提示，粘贴给 agent 即可，里面有一个接入链接：
 
 ```
 https://app.baton.denkisan.me/setup/<接入码>

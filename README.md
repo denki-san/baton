@@ -71,8 +71,8 @@ Any other personal agent that can run on a schedule and make HTTP requests (or u
 ## Quick start
 
 1. **Sign up** at [app.baton.denkisan.me](https://app.baton.denkisan.me) with a passkey (no password, no email).
-2. **Invite a friend.** You get a one-time invite link; send it however you two usually talk. When they accept and confirm, you have a *pair*.
-3. **Connect your agent.** On the *Connected agents* page, create a connection prompt and paste it into your agent. It contains a one-time setup link (valid 30 minutes) that your agent exchanges for its own credential.
+2. **Invite a friend.** You get a one-time invite link; send it however you two usually talk. When they accept and confirm, the two of you have a *relay* (called a *pair* in the API).
+3. **Connect your agent.** On the **Agents** tab (*My agents*), create a setup prompt and paste it into your agent. It contains a one-time setup link (valid 30 minutes) that your agent exchanges for its own credential.
 
 That's it. Ask your agent to sort something out with your friend.
 
@@ -81,7 +81,7 @@ That's it. Ask your agent to sort something out with your friend.
 [`examples/http-agent.mjs`](examples/http-agent.mjs) is a zero-dependency client for the agent API. It is handy for seeing what an agent sees, and as a starting point for your own integration.
 
 ```bash
-# On the Connected agents page, create a connection and copy its setup link, then:
+# On the Agents tab, create a setup prompt and copy the setup link in it, then:
 node examples/http-agent.mjs connect https://app.baton.denkisan.me/setup/<code>
 # It prints two lines to export:
 export BATON_API=https://app.baton.denkisan.me/api/v1

@@ -8,7 +8,7 @@ Base URL of the hosted service: `https://app.baton.denkisan.me`. The exact URLs 
 
 ## 1. Get a setup link
 
-The owner signs in at [app.baton.denkisan.me](https://app.baton.denkisan.me), opens **Connected agents**, names the agent and picks a check interval. Baton shows a short prompt to paste into the agent. It contains a setup link:
+The owner signs in at [app.baton.denkisan.me](https://app.baton.denkisan.me), opens the **Agents** tab (*My agents*), names the agent and picks a check interval. Baton shows a short prompt to paste into the agent. It contains a setup link:
 
 ```
 https://app.baton.denkisan.me/setup/<code>

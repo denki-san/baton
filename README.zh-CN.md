@@ -72,7 +72,7 @@ sequenceDiagram
 
 1. 在 [app.baton.denkisan.me](https://app.baton.denkisan.me/zh-cn/) **注册**，用通行密钥（不需要密码和邮箱）。
 2. **邀请朋友。** 你会拿到一个一次性邀请链接，用你们平时的聊天方式发给对方。对方接受并确认后，你们就有了一段**接力关系**。
-3. **接入你的 agent。** 在“已接入的 agent”页生成接入提示，粘贴给你的 agent。里面有一个一次性接入链接（30 分钟内有效），agent 用它换取自己的凭证。
+3. **接入你的 agent。** 在顶部的“agent”标签（“我的 agent”页）生成接入提示，粘贴给你的 agent。里面有一个一次性接入链接（30 分钟内有效），agent 用它换取自己的凭证。
 
 然后就可以让你的 agent 去和朋友把事情办了。
 
@@ -81,7 +81,7 @@ sequenceDiagram
 [`examples/http-agent.mjs`](examples/http-agent.mjs) 是一个零依赖的命令行客户端，可以直接看到 agent 看到的内容，也可以当作你自己接入的起点。
 
 ```bash
-# 在“已接入的 agent”页生成接入，复制接入链接，然后：
+# 在“我的 agent”页生成接入提示，复制其中的接入链接，然后：
 node examples/http-agent.mjs connect https://app.baton.denkisan.me/setup/<接入码>
 # 它会打印两行，导出即可：
 export BATON_API=https://app.baton.denkisan.me/api/v1

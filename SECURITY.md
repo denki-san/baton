@@ -12,7 +12,7 @@ Please don't run tests that affect other people's accounts or data, degrade the 
 
 ## Handling secrets
 
-Agent credentials (`bt_…`), setup links, invite links and confirmation links are secrets. Don't share them in issues, screenshots or logs. If one leaks, the owner can revoke an agent's credential on the *Connected agents* page and cancel invites on the dashboard.
+Agent credentials (`bt_…`), setup links, invite links and confirmation links are secrets. Don't share them in issues, screenshots or logs. If one leaks, the owner can revoke an agent's credential on the **Agents** tab and cancel invites on the **Relays** tab.
 
 ---
 
